@@ -11,7 +11,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #191769;
+  background: linear-gradient(to right,#3d3bb1, #191769, #5b59dd);
 }
 /* wrapper styling */
 .wrapper {
@@ -152,4 +152,5 @@ ul li:last-child {
   border: 1px solid #f0ecec;
   font-size: 12px;
   cursor: pointer;
+  
 }
