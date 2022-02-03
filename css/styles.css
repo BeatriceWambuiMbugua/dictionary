@@ -11,7 +11,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(#191769, #3d3bb1);
+  background: linear-gradient(to right,#3d3bb1, #191769, #5b59dd);
 }
 /* wrapper styling */
 .wrapper {
