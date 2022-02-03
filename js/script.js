@@ -12,7 +12,7 @@ function data(result, word) {
   if (result.title) {
     infoText.innerHTML = `Can't find the meaning of <span>"${word}"</span>. Please, try to search for another`;
   } else {
-    wrapper.classList.add("active");
+    wrapper.classList.add("active"); //if the searched word exists then the active class is added in the wrapper
 
     let definitions = result[0].meanings[0].definitions[0];
     phonetics = `${result[0].meanings[0].partOfSpeech}/${result[0].phonetics[0].text}/`;
@@ -26,17 +26,19 @@ function data(result, word) {
     audio = new Audio("https:" + result[0].phonetics[0].audio);
 
     if (definitions.synonyms[0] == undefined) {
+      //if there is no synonym then hide the synonyms div
       synonyms.parentElement.style.display = "none";
     } else {
       synonyms.parentElement.style.display = "block";
       synonyms.innerHTML = "";
       for (let i = 0; i < 5; i++) {
+        //getting only 5 synonyms out of the many
         let tag = `<span onclick= search('${definitions.synonyms[i]}')>${definitions.synonyms[i]}</span>`;
         tag =
           i == 4
             ? (tag = `<span onclick="search('${definitions.synonyms[i]}')">${definitions.synonyms[4]}</span>`)
             : tag;
-        synonyms.insertAdjacentHTML("beforeend", tag);
+        synonyms.insertAdjacentHTML("beforeend", tag); //passing all 5 synonyms inside synonyms div
       }
     }
   }
@@ -49,6 +51,7 @@ function search(word) {
   wrapper.classList.remove("active");
 }
 // fetch api function
+// The API returns an object of search word
 function fetchApi(word) {
   infoText.style.color = "#000";
   wrapper.classList.remove("active");
@@ -58,7 +61,8 @@ function fetchApi(word) {
     .then((res) => res.json())
     .then((result) => data(result, word));
 }
-
+// if pressed key is enter and the input field is not empty, the call fetchApi function.
+// The Fetch API provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network
 searchInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter" && e.target.value) {
     fetchApi(e.target.value);
